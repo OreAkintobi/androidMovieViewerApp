@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentMain">
+
+    <fragment
+        android:id="@+id/fragmentMain"
+        android:name="com.ore.oremovieapp.ui.movies.MovieFragment"
+        android:label="MainApp"
+        tools:layout="@layout/movie_fragment">
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentAllMovies"
+            app:destination="@id/fragmentAllMovies" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllMovies"
+        android:name="com.ore.oremovieapp.FragmentAllMovies"
+        android:label="FragmentAllMovies"
+        tools:layout="@layout/fragment_all_movies">
+        <action
+            android:id="@+id/action_fragmentAllMovies_to_fragmentViewSingleMovie"
+            app:destination="@id/fragmentViewSingleMovie" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentViewSingleMovie"
+        android:name="com.ore.oremovieapp.FragmentViewSingleMovie"
+        android:label="FragmentViewSingleMovie"
+        tools:layout="@layout/fragment_view_single_movie">
+        <argument
+            android:name="movie"
+            app:argType="com.ore.oremovieapp.data.Movie" />
+    </fragment>
+</navigation>

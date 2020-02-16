@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="com.ore.oremovieapp.data.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".ui.movies.MovieFragment">
+
+        <TextView
+            android:id="@+id/appNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/antic"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/openAppLogo" />
+
+        <TextView
+            android:id="@+id/appNameText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/antic"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appNameText" />
+
+        <ImageView
+            android:id="@+id/openAppLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="132dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_movie" />
+
+        <TextView
+            android:id="@+id/openAppButton"
+            style="@style/ExecuteButton"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/antic"
+            android:hint="@string/open_app"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.500"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appNameText2" />
+
+        <TextView
+            android:id="@+id/viewAllMoviesButton"
+            style="@style/ExecuteButton"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/antic"
+            android:hint="@string/view_all_contacts"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/openAppButton"
+            app:layout_constraintTop_toBottomOf="@+id/openAppButton" />
+
+        <TextView
+            android:id="@+id/killAppButton"
+            style="@style/ExecuteButton"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/antic"
+            android:hint="@string/exit_app"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewAllMoviesButton"
+            app:layout_constraintTop_toBottomOf="@+id/viewAllMoviesButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
