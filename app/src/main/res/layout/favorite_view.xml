@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="movie"
-            type="com.ore.oremovieapp.data.Movie" />
+            name="favoriteMovie"
+            type="com.ore.oremovieapp.data.FavoriteMovie" />
     </data>
 
     <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_marginBottom="4dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:text="@{movie.title}"
+                android:text="@{favoriteMovie.title}"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 tools:text="Placeholder" />
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{movie.release_date}"
+                android:text="@{favoriteMovie.release_date}"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 tools:text="Placeholder" />

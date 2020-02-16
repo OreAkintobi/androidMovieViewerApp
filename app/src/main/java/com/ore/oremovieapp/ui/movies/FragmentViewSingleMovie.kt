@@ -1,4 +1,4 @@
-package com.ore.oremovieapp
+package com.ore.oremovieapp.ui.movies
 
 
 import android.os.Bundle
@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.ore.oremovieapp.R
 import com.ore.oremovieapp.databinding.FragmentViewSingleMovieBinding
 import com.squareup.picasso.Picasso
 
 class FragmentViewSingleMovie : Fragment() {
-    private val REQUESTCODE = 1
     private lateinit var binding: FragmentViewSingleMovieBinding
 
     override fun onCreateView(
@@ -20,9 +20,15 @@ class FragmentViewSingleMovie : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_view_single_movie, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_view_single_movie, container, false
+            )
 
-        val args = FragmentViewSingleMovieArgs.fromBundle(arguments!!)
+        val args =
+            FragmentViewSingleMovieArgs.fromBundle(
+                arguments!!
+            )
         val movie = args.movie
         binding.movie = movie
         val path = movie.poster_path

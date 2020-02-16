@@ -13,10 +13,16 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentAllMovies"
             app:destination="@id/fragmentAllMovies" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentFavorites"
+            app:destination="@id/fragmentFavorites" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentFavorites2"
+            app:destination="@id/fragmentFavorites" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAllMovies"
-        android:name="com.ore.oremovieapp.FragmentAllMovies"
+        android:name="com.ore.oremovieapp.ui.movies.FragmentAllMovies"
         android:label="FragmentAllMovies"
         tools:layout="@layout/fragment_all_movies">
         <action
@@ -25,11 +31,22 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentViewSingleMovie"
-        android:name="com.ore.oremovieapp.FragmentViewSingleMovie"
+        android:name="com.ore.oremovieapp.ui.movies.FragmentViewSingleMovie"
         android:label="FragmentViewSingleMovie"
         tools:layout="@layout/fragment_view_single_movie">
         <argument
             android:name="movie"
             app:argType="com.ore.oremovieapp.data.Movie" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFavorites"
+        android:name="com.ore.oremovieapp.ui.movies.FragmentFavorites"
+        android:label="FragmentFavorites"
+        tools:layout="@layout/fragment_favorites">
+        <argument
+            android:name="favoriteMovie"
+            android:defaultValue="@null"
+            app:argType="com.ore.oremovieapp.data.FavoriteMovie"
+            app:nullable="true" />
     </fragment>
 </navigation>

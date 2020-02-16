@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.ore.oremovieapp.R
 import com.ore.oremovieapp.databinding.MovieFragmentBinding
@@ -38,8 +39,10 @@ class MovieFragment : Fragment() {
 //        initializeUi()
 
 
-        binding.openAppButton.setOnClickListener {
-            //            view.findNavController().navigate(R.id.action_fragmentOpenApp_to_fragmentAddContact)
+        binding.viewFavoriteMoviesButton.setOnClickListener {
+            val action = MovieFragmentDirections.actionFragmentMainToFragmentFavorites(null)
+            Navigation.findNavController(it).navigate(action)
+//            view?.findNavController()?.navigate(R.id.action_fragmentMain_to_fragmentFavorites)
         }
 
         binding.viewAllMoviesButton.setOnClickListener {

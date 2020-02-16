@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.ore.oremovieapp.R
-import com.ore.oremovieapp.databinding.MovieViewBinding
+import com.ore.oremovieapp.databinding.FavoriteViewBinding
 import com.squareup.picasso.Picasso
 
 /** THIS CLASS PROVIDES/INFLATES A UNIT TEMPLATE OF WHAT EACH CONTACT DISPLAYED IN A RECYCLERVIEW LIST WOULD LOOK LIKE **/
-class MovieAdapter(
-    private var movies: List<Movie>,
+class FavoriteAdapter(
+    private var movies: List<FavoriteMovie>,
     private var context: Context,
-    private val clickListener: (Movie) -> Unit,
-    private val clickListener2: (Movie, View) -> Unit
+    private val clickListener: (FavoriteMovie) -> Unit,
+    private val clickListener2: (FavoriteMovie, View) -> Unit
 ) :
-    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private var results = emptyList<Movie>()
-    private lateinit var binding: MovieViewBinding
+    RecyclerView.Adapter<FavoriteAdapter.MovieViewHolder>() {
+    private var results = emptyList<FavoriteMovie>()
+    private lateinit var binding: FavoriteViewBinding
 
 
     override fun onCreateViewHolder(
@@ -27,7 +27,7 @@ class MovieAdapter(
         viewType: Int
     ): MovieViewHolder {
         val inflater = LayoutInflater.from(context)
-        binding = MovieViewBinding.inflate(inflater, parent, false)
+        binding = FavoriteViewBinding.inflate(inflater, parent, false)
 
         return MovieViewHolder(binding)
     }
@@ -58,14 +58,14 @@ class MovieAdapter(
             .error(R.drawable.ic_movie).into(binding.movieImage2)
     }
 
-    class MovieViewHolder(private val binding: MovieViewBinding) :
+    class MovieViewHolder(private val binding: FavoriteViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            data: Movie,
-            clickListener: (Movie) -> Unit,
-            clickListener2: (Movie, View) -> Unit
+            data: FavoriteMovie,
+            clickListener: (FavoriteMovie) -> Unit,
+            clickListener2: (FavoriteMovie, View) -> Unit
         ) {
-            binding.movie = data
+            binding.favoriteMovie = data
             if (data.isFavorite) {
                 binding.movieFaveButton.setBackgroundColor(
                     getColor(

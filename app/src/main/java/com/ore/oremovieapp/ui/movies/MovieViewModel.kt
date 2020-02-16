@@ -11,6 +11,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
 
     var allMovies = movieRepository.getAllMovies()
+    var favoriteMovies = movieRepository.getFavoriteMovies()
+
 
 //    lateinit var movies: ArrayList<Movie>
 

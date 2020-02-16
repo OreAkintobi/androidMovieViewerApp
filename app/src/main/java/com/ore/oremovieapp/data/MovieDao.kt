@@ -1,10 +1,7 @@
 package com.ore.oremovieapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 
 /** DAO -> Repository -> ViewModel **/
@@ -27,4 +24,6 @@ interface MovieDao {
     @Query("SELECT * from movie_table ORDER BY title ASC")
     fun getAlphabetizedMovies(): LiveData<List<Movie>>
 
+    @Update
+    fun updateMovie(movie: Movie)
 }

@@ -1,7 +1,6 @@
 package com.ore.oremovieapp.data
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.gson.GsonBuilder
 import okhttp3.Call
@@ -13,7 +12,8 @@ import java.io.IOException
 class MovieRepository(application: Application) {
 
     private var movieDatabase: MovieDatabase = MovieDatabase.getInstance(application)!!
-    private val repositoryDao = movieDatabase.movieDao()
+    private val repositoryMovieDao = movieDatabase.movieDao()
+    private val repositoryFavoriteDao = movieDatabase.favoriteDao()
 
     private lateinit var list: ArrayList<Movie>
     private lateinit var roomMovieAdapter: MovieAdapter
@@ -32,8 +32,8 @@ class MovieRepository(application: Application) {
                 val gson = GsonBuilder().create()
                 val results = gson.fromJson(body, Result::class.java)
                 for (movie in results.results) {
-                    repositoryDao.insert(movie)
-                    Log.d("MOVIE", movie.toString())
+                    repositoryMovieDao.insert(movie)
+//                    Log.d("MOVIE", movie.toString())
                 }
             }
 
@@ -43,12 +43,18 @@ class MovieRepository(application: Application) {
         })
     }
 
-    fun getAllMovies(): LiveData<List<Movie>> = repositoryDao.getAllMovies()
+    fun fetchFavorites() {
+
+    }
+
+    fun getAllMovies(): LiveData<List<Movie>> = repositoryMovieDao.getAllMovies()
+    fun getFavoriteMovies(): LiveData<List<FavoriteMovie>> =
+        repositoryFavoriteDao.getFavoriteMovies()
 
 //    val allMovies: LiveData<List<Movie>> = movieDao.getAlphabetizedMovies()
 
     fun insert(movie: Movie) {
-        repositoryDao.insert(movie)
+        repositoryMovieDao.insert(movie)
     }
 
 
