@@ -61,23 +61,4 @@ class MovieFragment : Fragment() {
 
         return binding.root
     }
-
-//    private fun initializeUi() {
-//        val factory = InjectorUtils.provideMovieViewModelFactory()
-//        viewModel = ViewModelProvider(this, factory).get(MovieViewModel::class.java)
-//
-//        viewModel.getMovies().observe(this, Observer { movies ->
-////            val stringBuilder = StringBuilder()
-////            movies.forEach { movie ->
-////                stringBuilder.append("$movie\n\n")
-////            }
-//        })
-//    }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
-
 }

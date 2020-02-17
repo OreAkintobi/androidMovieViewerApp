@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ore.oremovieapp.R
 import com.ore.oremovieapp.data.FavoriteAdapter
 import com.ore.oremovieapp.databinding.FragmentFavoritesBinding
@@ -50,7 +50,10 @@ class FragmentFavorites : Fragment() {
             binding.recyclerView.adapter = adapter
 //            adapter.setMovies(allMovies)
         }
-        val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        binding.recyclerView.layoutManager = manager
+
+        val manager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = manager
     }
 }

@@ -9,14 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ore.oremovieapp.R
 import com.ore.oremovieapp.data.FavoriteMovie
 import com.ore.oremovieapp.data.Movie
 import com.ore.oremovieapp.data.MovieAdapter
 import com.ore.oremovieapp.data.MovieDatabase
 import com.ore.oremovieapp.databinding.FragmentAllMoviesBinding
-import kotlinx.android.synthetic.main.movie_view.view.*
+import kotlinx.android.synthetic.main.movie_view3.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -67,18 +67,22 @@ class FragmentAllMovies : Fragment() {
                     movie.release_date,
                     movie.overview,
                     movie.backdrop_path,
+                    movie.vote_average,
                     movie.poster_path,
                     movie.isFavorite
                 )
                 if (movie.isFavorite) {
                     !movie.isFavorite
+                    view.movieFaveButton.setBackgroundColor(resources.getColor(R.color.design_default_color_primary))
+                    view.movieFaveButton.text = "Add to Favorites"
                     GlobalScope.launch(Dispatchers.IO) {
                         MovieDatabase.getInstance(context!!)?.favoriteDao()?.delete(favoriteMovie)
                         MovieDatabase.getInstance(context!!)?.movieDao()?.updateMovie(movie)
                     }
                 } else {
                     !movie.isFavorite
-                    view.movieFaveButton.setBackgroundColor(resources.getColor(R.color.design_default_color_surface))
+                    view.movieFaveButton.setBackgroundColor(resources.getColor(R.color.design_default_color_error))
+                    view.movieFaveButton.text = "Added to Favorites"
                     GlobalScope.launch(Dispatchers.IO) {
                         MovieDatabase.getInstance(context!!)?.favoriteDao()?.insert(favoriteMovie)
                         MovieDatabase.getInstance(context!!)?.movieDao()?.updateMovie(movie)
@@ -88,17 +92,11 @@ class FragmentAllMovies : Fragment() {
             binding.recyclerView.adapter = adapter
 //            adapter.setMovies(allMovies)
         }
-        val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//        binding.recyclerView.layoutManager = manager
+
+        val manager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = manager
 
     }
-//    {Movie ->
-////                Log.e("MOVIES", allMovies.toString())
-////                View.movieFaveButton.setOnClickListener {
-////                    Toast.makeText(context,"${Movie.title} is clicked", Toast.LENGTH_LONG).show()
-////                }
-//
-//
-//        )
-//    }
 }

@@ -16,107 +16,103 @@
         android:background="@color/background"
         tools:context=".ui.movies.FragmentViewSingleMovie">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/AppTheme"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@{movie.title}"
-            app:titleTextColor="@color/background" />
+        <!--        <androidx.appcompat.widget.Toolbar-->
+        <!--            android:id="@+id/toolbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/black"-->
+        <!--            android:elevation="4dp"-->
+        <!--            android:theme="@style/AppTheme"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:title="@{movie.title}"-->
+        <!--            app:titleTextColor="@color/white" />-->
 
-        <LinearLayout
-            android:id="@+id/l1"
-            android:layout_width="409dp"
-            android:layout_height="601dp"
+        <FrameLayout
+            android:id="@+id/movieBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/movieImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp" />
-
-
-            <LinearLayout
-                android:id="@+id/l2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="57dp">
+                android:layout_height="match_parent" />
 
-
-                <TextView
-                    android:id="@+id/viewMovieTitle"
-                    style="@style/NormalText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="@{movie.title}"
-                    android:textSize="16sp"
-                    tools:text="Placeholder" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/l3"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="57dp">
+                android:layout_height="350dp"
+                android:layout_gravity="bottom|center_horizontal|center_vertical"
+                android:background="@color/black" />
 
-                <TextView
-                    android:id="@+id/viewMovieReleaseDate"
-                    style="@style/NormalText"
+            <FrameLayout
+                android:layout_width="380dp"
+                android:layout_height="400dp"
+                android:layout_gravity="bottom|center_horizontal|center_vertical"
+                android:background="@color/midnight_blue">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="@{movie.release_date}"
-                    android:textSize="16sp"
-                    tools:text="Placeholder" />
+                    android:layout_height="match_parent">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/viewMovieTitle"
+                        style="@style/NormalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@{movie.title}"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Placeholder" />
 
-            <LinearLayout
-                android:id="@+id/l4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="57dp">
+                    <TextView
+                        android:id="@+id/viewMovieReleaseDate"
+                        style="@style/NormalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="32dp"
+                        android:text='@{"Released: " + movie.release_date}'
+                        android:textColor="@color/sandy_brown"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="Placeholder" />
 
-                <TextView
-                    android:id="@+id/viewMovieOverview"
-                    style="@style/NormalText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="@{movie.overview}"
-                    android:textSize="16sp"
-                    tools:text="Placeholder" />
+                    <TextView
+                        android:id="@+id/viewMovieOverview"
+                        style="@style/NormalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:justificationMode="inter_word"
+                        android:text="@{movie.overview}"
+                        android:textColor="@color/dim_gray"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toTopOf="@+id/viewMovieReleaseDate"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewMovieTitle"
+                        app:layout_constraintVertical_bias="0.146"
+                        tools:text="Placeholder" />
 
-            </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+            </FrameLayout>
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

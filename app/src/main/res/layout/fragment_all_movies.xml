@@ -13,20 +13,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".ui.movies.FragmentAllMovies">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/black"
             android:theme="@style/AppTheme"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="All Movies"
-            app:titleTextColor="@color/background" />
+            app:titleTextColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

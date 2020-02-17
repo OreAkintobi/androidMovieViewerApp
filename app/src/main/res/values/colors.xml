@@ -4,9 +4,15 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="background">#000000</color>
-    <color name="main_text">#fece2f</color>
     <color name="black">#000000</color>
+    <color name="midnight_blue">#171638</color>
+    <color name="sandy_brown">#e4ca4d</color>
+    <color name="dim_gray">#57556d</color>
+    <color name="sea_green">#268653</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="main_text">#fece2f</color>
+    <color name="background">#000000</color>
     <color name="dark_for_theme">#1b1b1b</color>
     <color name="colorPrimary2">#b71c1c</color>
 </resources>

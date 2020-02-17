@@ -10,6 +10,7 @@ import com.ore.oremovieapp.R
 import com.ore.oremovieapp.databinding.FavoriteViewBinding
 import com.squareup.picasso.Picasso
 
+
 /** THIS CLASS PROVIDES/INFLATES A UNIT TEMPLATE OF WHAT EACH CONTACT DISPLAYED IN A RECYCLERVIEW LIST WOULD LOOK LIKE **/
 class FavoriteAdapter(
     private var movies: List<FavoriteMovie>,
@@ -81,3 +82,15 @@ class FavoriteAdapter(
         }
     }
 }
+
+//@Throws(MalformedURLException::class, IOException::class)
+//fun drawable_from_url(url: String?, src_name: String?): Drawable? {
+//    return Drawable.createFromStream(
+//        URL(url).awagetContent() as InputStream?,
+//        src_name
+//    )
+//}
+
+//var bmImg = BitmapFactory.decodeStream(is);
+//var background = new BitmapDrawable(bmImg);
+//linearLayout.setBackgroundDrawable(background);
