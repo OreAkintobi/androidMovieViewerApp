@@ -12,7 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ore.oremovieapp.R
 import com.ore.oremovieapp.data.FavoriteAdapter
+import com.ore.oremovieapp.data.Movie
+import com.ore.oremovieapp.data.MovieDatabase
 import com.ore.oremovieapp.databinding.FragmentFavoritesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -21,6 +26,8 @@ class FragmentFavorites : Fragment() {
 
     private var viewModel: MovieViewModel? = null
     private lateinit var binding: FragmentFavoritesBinding
+    private var database = MovieDatabase
+    private lateinit var movie: Movie
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +47,29 @@ class FragmentFavorites : Fragment() {
 
         viewModel = ViewModelProvider(this).get((MovieViewModel::class.java))
 
-        viewModel!!.favoriteMovies.observeForever { favoriteMovies ->
-            val adapter = FavoriteAdapter(favoriteMovies, this.context!!, { movie ->
-                Toast.makeText(context, movie.title, Toast.LENGTH_LONG).show()
-            }, { movie, view ->
-                movie.isFavorite = !movie.isFavorite
-                Toast.makeText(context, "${movie.isFavorite}", Toast.LENGTH_LONG).show()
-            })
+        viewModel?.favoriteMovies?.observeForever { favoriteMovies ->
+            val adapter = context?.let {
+                FavoriteAdapter(favoriteMovies, it, { movie ->
+                    Toast.makeText(context, movie.title, Toast.LENGTH_LONG).show()
+                }, { favoriteMovie, view ->
+                    favoriteMovie.isFavorite = false
+                    movie = Movie(
+                        favoriteMovie.id,
+                        favoriteMovie.title,
+                        favoriteMovie.release_date,
+                        favoriteMovie.overview,
+                        favoriteMovie.backdrop_path,
+                        favoriteMovie.vote_average,
+                        favoriteMovie.poster_path,
+                        favoriteMovie.isFavorite
+                    )
+                    Toast.makeText(context, "${movie.isFavorite}", Toast.LENGTH_LONG).show()
+                    GlobalScope.launch(Dispatchers.IO) {
+                        database.getInstance(context!!)?.favoriteDao()?.delete(favoriteMovie)
+                        database.getInstance(context!!)?.movieDao()?.updateMovie(movie)
+                    }
+                })
+            }
             binding.recyclerView.adapter = adapter
 //            adapter.setMovies(allMovies)
         }

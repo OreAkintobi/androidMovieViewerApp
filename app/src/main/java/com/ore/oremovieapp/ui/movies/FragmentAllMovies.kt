@@ -12,22 +12,20 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ore.oremovieapp.R
 import com.ore.oremovieapp.data.FavoriteMovie
-import com.ore.oremovieapp.data.Movie
 import com.ore.oremovieapp.data.MovieAdapter
 import com.ore.oremovieapp.data.MovieDatabase
 import com.ore.oremovieapp.databinding.FragmentAllMoviesBinding
-import kotlinx.android.synthetic.main.movie_view3.view.*
+import kotlinx.android.synthetic.main.movie_view.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /** SHOWS RECYCLERVIEW OF ALL CONTACTS STORED **/
-class FragmentAllMovies : Fragment() {
+class FragmentAllMovies() : Fragment() {
 
     private var viewModel: MovieViewModel? = null
     private lateinit var binding: FragmentAllMoviesBinding
-    private lateinit var movieList: MutableList<Movie>
-    private lateinit var database: MovieDatabase
+    private var database = MovieDatabase
     private lateinit var favoriteMovie: FavoriteMovie
 
     override fun onCreateView(
@@ -50,51 +48,51 @@ class FragmentAllMovies : Fragment() {
 
         viewModel!!.loadMoviesIntoDB()
 
-        viewModel!!.allMovies.observeForever { allMovies ->
-            val adapter = MovieAdapter(allMovies, this.context!!, { movie ->
-                view!!.findNavController().navigate(
-                    FragmentAllMoviesDirections.actionFragmentAllMoviesToFragmentViewSingleMovie(
-                        movie
+        viewModel?.allMovies?.observeForever { allMovies ->
+            val adapter = context?.applicationContext?.let {
+                MovieAdapter(allMovies, it, { movie ->
+                    view!!.findNavController().navigate(
+                        FragmentAllMoviesDirections.actionFragmentAllMoviesToFragmentViewSingleMovie(
+                            movie
+                        )
                     )
-                )
-                Toast.makeText(context, movie.title, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, movie.title, Toast.LENGTH_LONG).show()
 
-            }, { movie, view ->
-                Toast.makeText(context, "${movie.isFavorite}", Toast.LENGTH_SHORT).show()
-                favoriteMovie = FavoriteMovie(
-                    movie.id,
-                    movie.title,
-                    movie.release_date,
-                    movie.overview,
-                    movie.backdrop_path,
-                    movie.vote_average,
-                    movie.poster_path,
-                    movie.isFavorite
-                )
-                if (movie.isFavorite) {
-                    !movie.isFavorite
-                    view.movieFaveButton.setBackgroundColor(resources.getColor(R.color.design_default_color_primary))
-                    view.movieFaveButton.text = "Add to Favorites"
-                    GlobalScope.launch(Dispatchers.IO) {
-                        MovieDatabase.getInstance(context!!)?.favoriteDao()?.delete(favoriteMovie)
-                        MovieDatabase.getInstance(context!!)?.movieDao()?.updateMovie(movie)
+                }, { movie, view ->
+                    Toast.makeText(context, "before${movie.isFavorite}", Toast.LENGTH_SHORT).show()
+                    movie.isFavorite = true
+                    Toast.makeText(context, "after ${movie.isFavorite}", Toast.LENGTH_SHORT).show()
+                    favoriteMovie = FavoriteMovie(
+                        movie.id,
+                        movie.title,
+                        movie.release_date,
+                        movie.overview,
+                        movie.backdrop_path,
+                        movie.vote_average,
+                        movie.poster_path,
+                        movie.isFavorite
+                    )
+                    if (movie.isFavorite) {
+//                        !movie.isFavorite
+                        view.movieFaveButtonAll.setBackgroundColor(resources.getColor(R.color.sea_green))
+                        view.movieFaveButtonAll.text = "Remove from Favorites"
+                        GlobalScope.launch(Dispatchers.IO) {
+                            database.getInstance(context!!)?.favoriteDao()?.insert(favoriteMovie)
+                            database.getInstance(context!!)?.movieDao()?.updateMovie(movie)
+                        }
+                    } else {
+//                        !movie.isFavorite
+//                        view.movieFaveButtonAll.setBackgroundColor(resources.getColor(R.color.design_default_color_error))
+                        view.movieFaveButtonAll.text = "Add to Favorites"
+                        GlobalScope.launch(Dispatchers.IO) {
+                            database.getInstance(context!!)?.favoriteDao()?.delete(favoriteMovie)
+                            database.getInstance(context!!)?.movieDao()?.updateMovie(movie)
+                        }
                     }
-                } else {
-                    !movie.isFavorite
-                    view.movieFaveButton.setBackgroundColor(resources.getColor(R.color.design_default_color_error))
-                    view.movieFaveButton.text = "Added to Favorites"
-                    GlobalScope.launch(Dispatchers.IO) {
-                        MovieDatabase.getInstance(context!!)?.favoriteDao()?.insert(favoriteMovie)
-                        MovieDatabase.getInstance(context!!)?.movieDao()?.updateMovie(movie)
-                    }
-                }
-            })
+                })
+            }
             binding.recyclerView.adapter = adapter
-//            adapter.setMovies(allMovies)
         }
-//        val manager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-//        binding.recyclerView.layoutManager = manager
-
         val manager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = manager
 

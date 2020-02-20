@@ -82,7 +82,7 @@
                         tools:text="voteAverage" />
 
                     <Button
-                        android:id="@+id/movieFaveButton"
+                        android:id="@+id/movieFaveButtonAll"
                         android:layout_width="170dp"
                         android:layout_height="38dp"
                         android:layout_gravity="bottom|center_vertical"

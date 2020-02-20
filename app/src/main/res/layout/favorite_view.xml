@@ -76,7 +76,7 @@
                         tools:text="voteAverage" />
 
                     <Button
-                        android:id="@+id/movieFaveButton"
+                        android:id="@+id/movieFaveButtonFave"
                         android:layout_width="170dp"
                         android:layout_height="38dp"
                         android:background="@color/sea_green"

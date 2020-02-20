@@ -1,5 +1,6 @@
 package com.ore.oremovieapp.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -43,12 +44,6 @@ class MovieAdapter(
         val movie = movies[position]
         val path = movie.poster_path
         holder.bind(movie, clickListener, clickListener2)
-//        Glide.with(binding.root.context).asBitmap()
-//            .load("https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg")
-//            .centerCrop().fallback(
-//                R.drawable.ic_movie
-//            ).error(R.drawable.ic_movie).placeholder(R.drawable.ic_movie)
-//            .into(binding.movieImage2)
 
         Picasso.get()
             .load("https://image.tmdb.org/t/p/w500${path}")
@@ -60,6 +55,7 @@ class MovieAdapter(
 
     class MovieViewHolder(private val binding: MovieViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ResourceAsColor")
         fun bind(
             data: Movie,
             clickListener: (Movie) -> Unit,
@@ -67,15 +63,19 @@ class MovieAdapter(
         ) {
             binding.movie = data
             if (data.isFavorite) {
-                binding.movieFaveButton.setBackgroundColor(
+                binding.movieFaveButtonAll.setBackgroundColor(
                     getColor(
-                        binding.movieFaveButton.context,
-                        R.color.design_default_color_surface
+                        binding.movieFaveButtonAll.context,
+                        R.color.sea_green
                     )
                 )
             }
             binding.root.setOnClickListener { clickListener(data) }
-            binding.movieFaveButton.setOnClickListener {
+            binding.movieFaveButtonAll.setOnClickListener {
+                //                binding.movieFaveButtonAll.setBackgroundColor(getColor(
+//                    binding.movieFaveButtonAll.context,
+//                    R.color.sea_green
+//                ))
                 clickListener2(data, binding.root)
             }
         }

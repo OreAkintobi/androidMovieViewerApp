@@ -44,13 +44,6 @@ class FavoriteAdapter(
         val movie = movies[position]
         val path = movie.poster_path
         holder.bind(movie, clickListener, clickListener2)
-//        Glide.with(binding.root.context).asBitmap()
-//            .load("https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg")
-//            .centerCrop().fallback(
-//                R.drawable.ic_movie
-//            ).error(R.drawable.ic_movie).placeholder(R.drawable.ic_movie)
-//            .into(binding.movieImage2)
-
         Picasso.get()
             .load("https://image.tmdb.org/t/p/w500${path}")
             .placeholder(
@@ -68,29 +61,17 @@ class FavoriteAdapter(
         ) {
             binding.favoriteMovie = data
             if (data.isFavorite) {
-                binding.movieFaveButton.setBackgroundColor(
+                binding.movieFaveButtonFave.setBackgroundColor(
                     getColor(
-                        binding.movieFaveButton.context,
-                        R.color.design_default_color_surface
+                        binding.movieFaveButtonFave.context,
+                        R.color.sea_green
                     )
                 )
             }
             binding.root.setOnClickListener { clickListener(data) }
-            binding.movieFaveButton.setOnClickListener {
+            binding.movieFaveButtonFave.setOnClickListener {
                 clickListener2(data, binding.root)
             }
         }
     }
 }
-
-//@Throws(MalformedURLException::class, IOException::class)
-//fun drawable_from_url(url: String?, src_name: String?): Drawable? {
-//    return Drawable.createFromStream(
-//        URL(url).awagetContent() as InputStream?,
-//        src_name
-//    )
-//}
-
-//var bmImg = BitmapFactory.decodeStream(is);
-//var background = new BitmapDrawable(bmImg);
-//linearLayout.setBackgroundDrawable(background);
